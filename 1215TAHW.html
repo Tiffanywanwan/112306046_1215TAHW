@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Calculator</title>
+    <script>
+        function add(a, b) {
+            return a + b;
+        }
+
+        function subtract(a, b) {
+            return a - b;
+        }
+
+        function multiply(a, b) {
+            return a * b;
+        }
+
+        function divide(a, b) {
+            if (b !== 0) {
+                return a / b;
+            } else {
+                throw new Error("Cannot divide by zero.");
+            }
+        }
+
+        function getUserInput() {
+            var num1 = parseFloat(prompt("Enter the first number:"));
+
+            if (isNaN(num1)) {
+                alert("Invalid input for the first number. Please enter a valid number.");
+                return null;
+            }
+
+            var num2 = parseFloat(prompt("Enter the second number:"));
+
+            if (isNaN(num2)) {
+                alert("Invalid input for the second number. Please enter a valid number.");
+                return null;
+            }
+
+            var operation = prompt("Choose operation (+, -, *, /):");
+
+            if (!['+', '-', '*', '/'].includes(operation)) {
+                alert("Invalid operation. Please choose a valid operation (+, -, *, /).");
+                return null;
+            }
+
+            return { num1, num2, operation };
+        }
+
+        function performCalculation() {
+            var userInput = getUserInput();
+
+            if (!userInput) {
+                return;
+            }
+
+            try {
+                switch (userInput.operation) {
+                    case '+':
+                        alert("Result: " + add(userInput.num1, userInput.num2));
+                        break;
+                    case '-':
+                        alert("Result: " + subtract(userInput.num1, userInput.num2));
+                        break;
+                    case '*':
+                        alert("Result: " + multiply(userInput.num1, userInput.num2));
+                        break;
+                    case '/':
+                        alert("Result: " + divide(userInput.num1, userInput.num2));
+                        break;
+                }
+            } catch (error) {
+                alert("Error: " + error.message);
+            }
+        }
+    </script>
+</head>
+<body>
+
+    <h1>Simple Calculator</h1>
+    <button onclick="performCalculation()">Run Calculator</button>
+
+</body>
+</html>
+
